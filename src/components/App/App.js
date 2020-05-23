@@ -3,15 +3,21 @@ import React from "react";
 import './App.css';
 
 import Header from "../Header/Header";
-import ItemList from "../ItemList/ItemList";
 import RandomPlanet from "../RandomPlanet/RandomPlanet";
-import PersonDetails from "../PersonDetails/PersonDetails";
+import ErrorButton from "../ErrorButton/ErrorButton";
+import ErrorIndicator from "../ErrorIndicator/ErrorIndicator";
+import PeoplePage from "../PeoplePage/PeoplePage";
 
 export default class App extends React.Component {
   state = {
     isRandomPlanet: true,
-    selectedPerson: null
+    hasError: false
   };
+
+  componentDidCatch() {
+    console.log('error');
+    this.setState({ hasError: true });
+  }
 
   onRandomPlanetChange = () => {
     this.setState(({ isRandomPlanet }) => {
@@ -22,30 +28,25 @@ export default class App extends React.Component {
     })
   };
 
-  onPersonSelected = (id) => {
-    console.log(id);
-    this.setState({
-      selectedPerson: id
-    })
-  };
 
   render() {
-    const { isRandomPlanet, selectedPerson } = this.state;
+    const { isRandomPlanet } = this.state;
     const randomPlanet = isRandomPlanet ? <RandomPlanet/> : null;
+
+    if (this.state.hasError) {
+      return <ErrorIndicator/>
+    }
 
     return (
       <div>
         <Header />
         <button onClick={ this.onRandomPlanetChange }>Toggle Random Planet</button>
+        <ErrorButton/>
         { randomPlanet }
-        <div className="row mb2">
-          <div className="col-md-6">
-            <ItemList onItemSelected={ this.onPersonSelected }/>
-          </div>
-          <div className="col-md-6">
-            <PersonDetails personId={ selectedPerson }/>
-          </div>
-        </div>
+
+        <PeoplePage/>
+        <PeoplePage/>
+        <PeoplePage/>
       </div>
     );
   }
