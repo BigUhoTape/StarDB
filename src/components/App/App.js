@@ -9,7 +9,8 @@ import PersonDetails from "../PersonDetails/PersonDetails";
 
 export default class App extends React.Component {
   state = {
-    isRandomPlanet: true
+    isRandomPlanet: true,
+    selectedPerson: null
   };
 
   onRandomPlanetChange = () => {
@@ -21,8 +22,15 @@ export default class App extends React.Component {
     })
   };
 
+  onPersonSelected = (id) => {
+    console.log(id);
+    this.setState({
+      selectedPerson: id
+    })
+  };
+
   render() {
-    const { isRandomPlanet } = this.state;
+    const { isRandomPlanet, selectedPerson } = this.state;
     const randomPlanet = isRandomPlanet ? <RandomPlanet/> : null;
 
     return (
@@ -32,10 +40,10 @@ export default class App extends React.Component {
         { randomPlanet }
         <div className="row mb2">
           <div className="col-md-6">
-            <ItemList />
+            <ItemList onItemSelected={ this.onPersonSelected }/>
           </div>
           <div className="col-md-6">
-            <PersonDetails />
+            <PersonDetails personId={ selectedPerson }/>
           </div>
         </div>
       </div>
