@@ -4,13 +4,15 @@ import SwapiService from "../../services/SwapiService";
 import './RandomPlanet.css';
 
 import Spiner from "../Spiner/Spiner";
+import ErrorIndicator from "../ErrorIndicator/ErrorIndicator";
 
 export default class RandomPlanet extends React.Component {
   swapiService = new SwapiService();
 
   state = {
     planet: {},
-    loading: true
+    loading: true,
+    error: false
   };
 
   constructor() {
@@ -22,20 +24,27 @@ export default class RandomPlanet extends React.Component {
     this.setState({ planet, loading: false });
   };
 
+  onError = (err) => {
+    this.setState({ error: true, loading: false })
+  };
+
   updatePlanet() {
     const id = Math.floor(Math.random()*20) + 2;
     this.swapiService.getPlanet(id)
       .then(planet => this.onPlanetLoaded(planet))
+      .catch(this.onError);
   };
 
   render() {
-    const { planet, loading } = this.state;
+    const { planet, loading, error } = this.state;
 
     const spinner = loading ? <Spiner/> : null;
-    const content = !loading ? <PlanetView planet={ planet }/> : null;
+    const content = !loading && !error ? <PlanetView planet={ planet }/> : null;
+    const errorIndicator = error ? <ErrorIndicator/> : null;
 
     return (
       <div className="random-planet jumbotron rounded">
+        { errorIndicator }
         { spinner }
         { content }
       </div>
