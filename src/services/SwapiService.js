@@ -15,28 +15,72 @@ export default class SwapiService {
 
   async getAllPeople() {
     const res = await this.getResourse('/people/');
-    return res.results;
+    return res.results.map(this._transformPerson);
   }
 
-  getPerson(id) {
-    return this.getResourse(`/people/${id}`);
+  async getPerson(id) {
+    const person = await this.getResourse(`/people/${id}`);
+    return this._transformPerson(person);
   }
 
   async getAllPlanets() {
     const res = await this.getResourse('/planets/');
-    return res.results;
+    return res.results.map(this._transformPlanet);
   }
 
-  getPlanet(id) {
-    return this.getResourse(`/planets/${id}`);
+  async getPlanet(id) {
+    const planet = await this.getResourse(`/planets/${id}`);
+    return this._transformPlanet(planet);
   }
 
   async getAllStarships() {
     const res = await this.getResourse('/starships/');
-    return res.results;
+    return res.results.map(this._transformStarship);
   }
 
-  getStarship(id) {
-    return this.getResourse(`/starships/${id}`);
+  async getStarship(id) {
+    const starship = await this.getResourse(`/starships/${id}`);
+    return this._transformStarship(starship);
+  }
+
+  _getByID(item) {
+    const regExp = /\/([0-9]*)\/$/;
+    const id = item.url.match(regExp)[1];
+    return id;
+  }
+
+  _transformPlanet(planet) {
+
+    return {
+      id: this._getByID(planet),
+      name: planet.name,
+      population: planet.population,
+      rotationPeriod: planet.rotation_period,
+      diameter: planet.diameter
+    }
+  }
+
+  _transformStarship(starship) {
+    return {
+      id: this._getByID(starship),
+      name: starship.name,
+      model: starship.model,
+      manufacturer: starship.manufacturer,
+      costInCredits: starship.costInCredits,
+      length: starship.length,
+      crew: starship.crew,
+      passengers: starship.passengers,
+      cargoCapacity: starship.cargoCapacity
+    }
+  }
+
+  _transformPerson(person) {
+    return {
+      id: this._getByID(person),
+      name: person.name,
+      gender: person.gender,
+      birthYear: person.birthYear,
+      eyeColor: person.eyeColor
+    }
   }
 }
