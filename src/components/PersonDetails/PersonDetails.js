@@ -10,7 +10,8 @@ export default class PersonDetails extends React.Component {
   swapiService = new SwapiService();
 
   state = {
-    person: null
+    person: null,
+    image: null
   };
 
   componentDidMount() {
@@ -24,33 +25,37 @@ export default class PersonDetails extends React.Component {
   }
 
   updatePerson = () => {
-    const { personId } = this.props;
+    const { personId, getData, getImageUrl } = this.props;
 
     if (personId === null) {
       return;
     }
 
-    this.swapiService.getPerson(personId)
+    getData(personId)
       .then(person => {
-        this.setState({ person })
+        this.setState({
+          person,
+          image: getImageUrl(person)
+        })
       })
   };
 
   render() {
     if (this.state.person === null) {
-      return <span>Select a person from list.</span>
+      return <span>Select a item from list.</span>
     }
 
-    if (this.props.personId !== this.state.person.id) {
-      return <Spiner/>
-    }
+    // if (this.props.personId !== this.state.person.id) {
+    //   return <Spiner/>
+    // }
 
     const { id, name, gender, birthYear, eyeColor } = this.state.person;
+    const { image } = this.state;
 
     return (
       <div className="person-details card">
         <img className="person-image"
-             src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`}
+             src={ image }
              alt="person"
         />
 

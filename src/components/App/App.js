@@ -5,9 +5,12 @@ import SwapiService from "../../services/SwapiService";
 
 import Header from "../Header/Header";
 import RandomPlanet from "../RandomPlanet/RandomPlanet";
-import ErrorButton from "../ErrorButton/ErrorButton";
+// import ErrorButton from "../ErrorButton/ErrorButton";
 import ErrorIndicator from "../ErrorIndicator/ErrorIndicator";
-import PeoplePage from "../PeoplePage/PeoplePage";
+// import PeoplePage from "../PeoplePage/PeoplePage";
+import ErrorBoundry from "../ErrorBoundry/ErrorBoundry";
+import Row from "../Row/Row";
+import PersonDetails from "../PersonDetails/PersonDetails";
 // import ItemList from "../ItemList/ItemList";
 // import PersonDetails from "../PersonDetails/PersonDetails";
 
@@ -38,18 +41,42 @@ export default class App extends React.Component {
     const { isRandomPlanet } = this.state;
     const randomPlanet = isRandomPlanet ? <RandomPlanet/> : null;
 
+    const { getPerson, getStarship, getPersonImage, getStarshipImage } = this.swapiService;
+
+    const personDetails = (
+      <PersonDetails
+        personId={11}
+        getData={ getPerson }
+        getImageUrl={ getPersonImage }
+      />
+    );
+
+    const starshipDetails = (
+      <PersonDetails
+        personId={5}
+        getData={ getStarship }
+        getImageUrl={ getStarshipImage }
+      />
+    );
+
     if (this.state.hasError) {
       return <ErrorIndicator/>
     }
 
     return (
+      <ErrorBoundry>
       <div>
         <Header />
-        <button onClick={ this.onRandomPlanetChange }>Toggle Random Planet</button>
-        <ErrorButton/>
-        { randomPlanet }
+        <Row
+          left={personDetails}
+          right={starshipDetails}
+        />
 
-        <PeoplePage/>
+        {/*<button onClick={ this.onRandomPlanetChange }>Toggle Random Planet</button>*/}
+        {/*<ErrorButton/>*/}
+        {/*{ randomPlanet }*/}
+
+        {/*<PeoplePage/>*/}
 
         {/*<div className="row mb2">*/}
         {/*  <div className="col-md-6">*/}
@@ -77,6 +104,7 @@ export default class App extends React.Component {
         {/*  </div>*/}
         {/*</div>*/}
       </div>
+      </ErrorBoundry>
     );
   }
 }

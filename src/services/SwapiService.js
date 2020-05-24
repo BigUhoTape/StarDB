@@ -43,6 +43,18 @@ export default class SwapiService {
     return this._transformStarship(starship);
   };
 
+  getPersonImage = ({ id }) => {
+    return `https://starwars-visualguide.com/assets/img/characters/${id}.jpg`
+  };
+
+  getStarshipImage = ({ id }) => {
+    return `https://starwars-visualguide.com/assets/img/starships/${id}.jpg`
+  };
+
+  getPlanetImage = ({ id }) => {
+    return `https://starwars-visualguide.com/assets/img/planets/${id}.jpg`
+  };
+
   _getByID = (item) => {
     const regExp = /\/([0-9]*)\/$/;
     const id = item.url.match(regExp)[1];
