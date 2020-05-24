@@ -37,7 +37,7 @@ export default class PersonDetails extends React.Component {
   };
 
   render() {
-    if (!this.state.person) {
+    if (this.state.person === null) {
       return <span>Select a person from list.</span>
     }
 

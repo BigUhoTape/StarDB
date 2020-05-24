@@ -7,7 +7,7 @@ import ErrorIndicator from "../ErrorIndicator/ErrorIndicator";
 
 export default class PeoplePage extends React.Component{
   state = {
-    selectedPerson: 3,
+    selectedPerson: null,
     hasError: false
   };
 
