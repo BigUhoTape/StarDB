@@ -8,8 +8,8 @@ import RandomPlanet from "../RandomPlanet/RandomPlanet";
 import ErrorButton from "../ErrorButton/ErrorButton";
 import ErrorIndicator from "../ErrorIndicator/ErrorIndicator";
 import PeoplePage from "../PeoplePage/PeoplePage";
-import ItemList from "../ItemList/ItemList";
-import PersonDetails from "../PersonDetails/PersonDetails";
+// import ItemList from "../ItemList/ItemList";
+// import PersonDetails from "../PersonDetails/PersonDetails";
 
 export default class App extends React.Component {
   swapiService = new SwapiService();
@@ -51,31 +51,31 @@ export default class App extends React.Component {
 
         <PeoplePage/>
 
-        <div className="row mb2">
-          <div className="col-md-6">
-            <ItemList
-              onItemSelected={ this.onPersonSelected }
-              getData={ this.swapiService.getAllPlanets }
-              renderItem={(item) => item.name }
-            />
-          </div>
-          <div className="col-md-6">
-            <PersonDetails personId={ this.state.selectedPerson }/>
-          </div>
-        </div>
+        {/*<div className="row mb2">*/}
+        {/*  <div className="col-md-6">*/}
+        {/*    <ItemList*/}
+        {/*      onItemSelected={ this.onPersonSelected }*/}
+        {/*      getData={ this.swapiService.getAllPlanets }*/}
+        {/*      renderItem={(item) => item.name }*/}
+        {/*    />*/}
+        {/*  </div>*/}
+        {/*  <div className="col-md-6">*/}
+        {/*    <PersonDetails personId={ this.state.selectedPerson }/>*/}
+        {/*  </div>*/}
+        {/*</div>*/}
 
-        <div className="row mb2">
-          <div className="col-md-6">
-            <ItemList
-              onItemSelected={ this.onPersonSelected }
-              getData={ this.swapiService.getAllStarships }
-              renderItem={(item) => item.name }
-            />
-          </div>
-          <div className="col-md-6">
-            <PersonDetails personId={ this.state.selectedPerson }/>
-          </div>
-        </div>
+        {/*<div className="row mb2">*/}
+        {/*  <div className="col-md-6">*/}
+        {/*    <ItemList*/}
+        {/*      onItemSelected={ this.onPersonSelected }*/}
+        {/*      getData={ this.swapiService.getAllStarships }*/}
+        {/*      renderItem={(item) => item.name }*/}
+        {/*    />*/}
+        {/*  </div>*/}
+        {/*  <div className="col-md-6">*/}
+        {/*    <PersonDetails personId={ this.state.selectedPerson }/>*/}
+        {/*  </div>*/}
+        {/*</div>*/}
       </div>
     );
   }
