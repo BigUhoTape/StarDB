@@ -31,7 +31,7 @@ export default class ItemDetails extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.personId !== prevProps.personId ||
+    if (this.props.itemId !== prevProps.itemId ||
       this.props.getData !== prevProps.getData ||
       this.props.getImageUrl !== prevProps.getImageUrl) { // обязательно!!! потому что setstate в свою очерьдь вызывает componentDidUpdate и будет зацикливание
       this.updatePerson();
@@ -39,13 +39,13 @@ export default class ItemDetails extends React.Component {
   }
 
   updatePerson = () => {
-    const { personId, getData, getImageUrl } = this.props;
+    const { itemId, getData, getImageUrl } = this.props;
 
-    if (personId === null) {
+    if (itemId === null) {
       return;
     }
 
-    getData(personId)
+    getData(itemId)
       .then(person => {
         this.setState({
           person,
@@ -59,7 +59,7 @@ export default class ItemDetails extends React.Component {
       return <span>Select a item from list.</span>
     }
 
-    if (this.props.personId !== this.state.person.id) {
+    if (this.props.itemId !== this.state.person.id) {
       return <Spiner/>
     }
 

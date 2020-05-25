@@ -5,7 +5,7 @@ import { WithSwapiService } from './../HocHelpers';
 const StarshipDetails = ({ itemId, getData, getImageUrl}) => {
   return (
     <ItemDetails
-      personId={itemId}
+      itemId={itemId}
       getData={getData}
       getImageUrl={getImageUrl}
     >
