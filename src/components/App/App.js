@@ -9,12 +9,12 @@ import ErrorIndicator from "../ErrorIndicator/ErrorIndicator";
 import ErrorBoundry from "../ErrorBoundry/ErrorBoundry";
 import ItemDetails, {Record} from "../ItemDetails/ItemDetails";
 import {PersonList, PlanetDetails, PlanetList, StarshipDetails, StarshipList} from "../SwComponents";
-import {PersonDetails} from "../SwComponents/Details";
+import {PersonDetails} from "../SwComponents";
 import {SwapiServiceProvider} from '../SwapiServiceContext';
 import DummySwapiService from "../../services/DummySwapiService";
 
 export default class App extends React.Component {
-  swapiService = new DummySwapiService();
+  swapiService = new SwapiService();
 
   state = {
     isRandomPlanet: true,
