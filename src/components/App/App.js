@@ -5,19 +5,16 @@ import SwapiService from "../../services/SwapiService";
 
 import Header from "../Header/Header";
 import RandomPlanet from "../RandomPlanet/RandomPlanet";
-// import ErrorButton from "../ErrorButton/ErrorButton";
 import ErrorIndicator from "../ErrorIndicator/ErrorIndicator";
-// import PeoplePage from "../PeoplePage/PeoplePage";
 import ErrorBoundry from "../ErrorBoundry/ErrorBoundry";
-import Row from "../Row/Row";
-import ItemDetails, { Record } from "../ItemDetails/ItemDetails";
-import ItemList from "../ItemList/ItemList";
+import ItemDetails, {Record} from "../ItemDetails/ItemDetails";
 import {PersonList, PlanetDetails, PlanetList, StarshipDetails, StarshipList} from "../SwComponents";
 import {PersonDetails} from "../SwComponents/Details";
-// import ItemDetails from "../ItemDetails/ItemDetails";
+import {SwapiServiceProvider} from '../SwapiServiceContext';
+import DummySwapiService from "../../services/DummySwapiService";
 
 export default class App extends React.Component {
-  swapiService = new SwapiService();
+  swapiService = new DummySwapiService();
 
   state = {
     isRandomPlanet: true,
@@ -26,11 +23,11 @@ export default class App extends React.Component {
 
   componentDidCatch() {
     console.log('error');
-    this.setState({ hasError: true });
+    this.setState({hasError: true});
   }
 
   onRandomPlanetChange = () => {
-    this.setState(({ isRandomPlanet }) => {
+    this.setState(({isRandomPlanet}) => {
       const newBoll = !isRandomPlanet;
       return {
         isRandomPlanet: newBoll
@@ -40,16 +37,16 @@ export default class App extends React.Component {
 
 
   render() {
-    const { isRandomPlanet } = this.state;
+    const {isRandomPlanet} = this.state;
     const randomPlanet = isRandomPlanet ? <RandomPlanet/> : null;
 
-    const { getPerson, getStarship, getPersonImage, getStarshipImage } = this.swapiService;
+    const {getPerson, getStarship, getPersonImage, getStarshipImage} = this.swapiService;
 
     const personDetails = (
       <ItemDetails
         personId={11}
-        getData={ getPerson }
-        getImageUrl={ getPersonImage }
+        getData={getPerson}
+        getImageUrl={getPersonImage}
       >
         <Record field="gender" label="Gender"/>
         <Record field="eyeColor" label="Eye Color"/>
@@ -59,8 +56,8 @@ export default class App extends React.Component {
     const starshipDetails = (
       <ItemDetails
         personId={5}
-        getData={ getStarship }
-        getImageUrl={ getStarshipImage }
+        getData={getStarship}
+        getImageUrl={getStarshipImage}
       >
         <Record field="model" label="Model"/>
         <Record field="costInCredits" label="Cost In Credits"/>
@@ -74,24 +71,9 @@ export default class App extends React.Component {
 
     return (
       <ErrorBoundry>
-      <div>
-        <Header />
-
-            {/*<ItemList*/}
-            {/*  onItemSelected={ this.onPersonSelected }*/}
-            {/*  getData={ this.swapiService.getAllPlanets }*/}
-            {/*>*/}
-            {/*  { ({name}) => <span>{ name }</span> }*/}
-            {/*</ItemList>*/}
-
-            {/*<ItemList*/}
-            {/*  onItemSelected={ this.onPersonSelected }*/}
-            {/*  getData={ this.swapiService.getAllStarships }*/}
-            {/*>*/}
-            {/*  { ({name}) => <span>{ name }</span> }*/}
-            {/*</ItemList>*/}
-
-            {/* после обновления */}
+        <SwapiServiceProvider value={this.swapiService}>
+          <div>
+            <Header/>
 
             <PersonDetails itemId={5}/>
             <PlanetDetails itemId={3}/>
@@ -103,7 +85,8 @@ export default class App extends React.Component {
 
             <PlanetList/>
 
-      </div>
+          </div>
+        </SwapiServiceProvider>
       </ErrorBoundry>
     );
   }
