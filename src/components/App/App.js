@@ -11,7 +11,7 @@ import ErrorIndicator from "../ErrorIndicator/ErrorIndicator";
 import ErrorBoundry from "../ErrorBoundry/ErrorBoundry";
 import Row from "../Row/Row";
 import PersonDetails, { Record } from "../PersonDetails/PersonDetails";
-// import ItemList from "../ItemList/ItemList";
+import ItemList from "../ItemList/ItemList";
 // import PersonDetails from "../PersonDetails/PersonDetails";
 
 export default class App extends React.Component {
@@ -74,42 +74,21 @@ export default class App extends React.Component {
       <ErrorBoundry>
       <div>
         <Header />
-        <Row
-          left={personDetails}
-          right={starshipDetails}
-        />
 
-        {/*<button onClick={ this.onRandomPlanetChange }>Toggle Random Planet</button>*/}
-        {/*<ErrorButton/>*/}
-        {/*{ randomPlanet }*/}
+            <ItemList
+              onItemSelected={ this.onPersonSelected }
+              getData={ this.swapiService.getAllPlanets }
+            >
+              { ({name}) => <span>{ name }</span> }
+            </ItemList>
 
-        {/*<PeoplePage/>*/}
+            <ItemList
+              onItemSelected={ this.onPersonSelected }
+              getData={ this.swapiService.getAllStarships }
+            >
+              { ({name}) => <span>{ name }</span> }
+            </ItemList>
 
-        {/*<div className="row mb2">*/}
-        {/*  <div className="col-md-6">*/}
-        {/*    <ItemList*/}
-        {/*      onItemSelected={ this.onPersonSelected }*/}
-        {/*      getData={ this.swapiService.getAllPlanets }*/}
-        {/*      renderItem={(item) => item.name }*/}
-        {/*    />*/}
-        {/*  </div>*/}
-        {/*  <div className="col-md-6">*/}
-        {/*    <PersonDetails personId={ this.state.selectedPerson }/>*/}
-        {/*  </div>*/}
-        {/*</div>*/}
-
-        {/*<div className="row mb2">*/}
-        {/*  <div className="col-md-6">*/}
-        {/*    <ItemList*/}
-        {/*      onItemSelected={ this.onPersonSelected }*/}
-        {/*      getData={ this.swapiService.getAllStarships }*/}
-        {/*      renderItem={(item) => item.name }*/}
-        {/*    />*/}
-        {/*  </div>*/}
-        {/*  <div className="col-md-6">*/}
-        {/*    <PersonDetails personId={ this.state.selectedPerson }/>*/}
-        {/*  </div>*/}
-        {/*</div>*/}
       </div>
       </ErrorBoundry>
     );
