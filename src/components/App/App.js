@@ -46,6 +46,7 @@ export default class App extends React.Component {
 
               <RandomPlanet/>
 
+              <Route path="/" exact render={() => <h2>Welcome to Star DB!!!</h2>}/>
               <Route path="/people" component={ PeoplePage }/>
               <Route path="/planets" component={ PlanetPage }/>
               <Route path="/starships" component={ StarshipPage }/>
