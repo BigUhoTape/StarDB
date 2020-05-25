@@ -9,6 +9,22 @@ import ErrorIndicator from "../ErrorIndicator/ErrorIndicator";
 export default class RandomPlanet extends React.Component {
   swapiService = new SwapiService();
 
+  static defaultProps = {
+    updateInterval: 5000
+  };
+
+  static propTypes = {
+    updateInterval: (props, propName, componentName) => {
+      const value = props[propName];
+
+      if (typeof value === 'number' && !isNaN(value)) {
+        return null;
+      }
+
+      return new TypeError(`${componentName}: ${propName} must be a number`);
+    }
+  };
+
   state = {
     planet: {},
     loading: true,
@@ -86,8 +102,4 @@ const PlanetView = ({ planet }) => {
       </div>
     </React.Fragment>
   )
-};
-
-RandomPlanet.defaultProps = {
-  updateInterval: 5000
 };
