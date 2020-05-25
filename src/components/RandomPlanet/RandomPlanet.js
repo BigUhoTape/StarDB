@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import SwapiService from "../../services/SwapiService";
 
 import './RandomPlanet.css';
@@ -14,15 +15,7 @@ export default class RandomPlanet extends React.Component {
   };
 
   static propTypes = {
-    updateInterval: (props, propName, componentName) => {
-      const value = props[propName];
-
-      if (typeof value === 'number' && !isNaN(value)) {
-        return null;
-      }
-
-      return new TypeError(`${componentName}: ${propName} must be a number`);
-    }
+    updateInterval: PropTypes.number // .isRequired значить что свойство обязательно
   };
 
   state = {
