@@ -18,7 +18,8 @@ export default class App extends React.Component {
 
   state = {
     isRandomPlanet: true,
-    hasError: false
+    hasError: false,
+    swapiService: new SwapiService()
   };
 
   componentDidCatch() {
@@ -35,12 +36,23 @@ export default class App extends React.Component {
     })
   };
 
+  onServiceChange = () => {
+    this.setState(({ swapiService }) => {
+      const Service = swapiService instanceof SwapiService ? DummySwapiService : SwapiService;
+
+      console.log(Service.name);
+
+      return {
+        swapiService: new Service()
+      }
+    })
+  };
 
   render() {
     const {isRandomPlanet} = this.state;
     const randomPlanet = isRandomPlanet ? <RandomPlanet/> : null;
 
-    const {getPerson, getStarship, getPersonImage, getStarshipImage} = this.swapiService;
+    const {getPerson, getStarship, getPersonImage, getStarshipImage} = this.state.swapiService;
 
     const personDetails = (
       <ItemDetails
@@ -71,9 +83,9 @@ export default class App extends React.Component {
 
     return (
       <ErrorBoundry>
-        <SwapiServiceProvider value={this.swapiService}>
+        <SwapiServiceProvider value={this.state.swapiService}>
           <div>
-            <Header/>
+            <Header onServiceChange={ this.onServiceChange }/>
 
             <PersonDetails itemId={5}/>
             <PlanetDetails itemId={3}/>

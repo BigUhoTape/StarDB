@@ -31,7 +31,9 @@ export default class ItemDetails extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.personId !== prevProps.personId) { // обязательно!!! потому что setstate в свою очерьдь вызывает componentDidUpdate и будет зацикливание
+    if (this.props.personId !== prevProps.personId ||
+      this.props.getData !== prevProps.getData ||
+      this.props.getImageUrl !== prevProps.getImageUrl) { // обязательно!!! потому что setstate в свою очерьдь вызывает componentDidUpdate и будет зацикливание
       this.updatePerson();
     }
   }

@@ -2,8 +2,7 @@ import React from "react";
 
 import './Header.css';
 
-export default class Header extends React.Component {
-  render() {
+const Header = ({ onServiceChange }) => {
     return (
       <div className="header d-flex">
         <h3>
@@ -22,7 +21,12 @@ export default class Header extends React.Component {
             <a href="#starships">Starships</a>
           </li>
         </ul>
+        <button
+          className="btn btn-primary btn-small"
+          onClick={ onServiceChange }
+        >Change Service</button>
       </div>
     );
-  }
-}
+};
+
+export default Header;
