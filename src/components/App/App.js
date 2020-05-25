@@ -10,9 +10,11 @@ import ErrorIndicator from "../ErrorIndicator/ErrorIndicator";
 // import PeoplePage from "../PeoplePage/PeoplePage";
 import ErrorBoundry from "../ErrorBoundry/ErrorBoundry";
 import Row from "../Row/Row";
-import PersonDetails, { Record } from "../PersonDetails/PersonDetails";
+import ItemDetails, { Record } from "../ItemDetails/ItemDetails";
 import ItemList from "../ItemList/ItemList";
-// import PersonDetails from "../PersonDetails/PersonDetails";
+import {PersonList, PlanetDetails, PlanetList, StarshipDetails, StarshipList} from "../SwComponents";
+import {PersonDetails} from "../SwComponents/Details";
+// import ItemDetails from "../ItemDetails/ItemDetails";
 
 export default class App extends React.Component {
   swapiService = new SwapiService();
@@ -44,18 +46,18 @@ export default class App extends React.Component {
     const { getPerson, getStarship, getPersonImage, getStarshipImage } = this.swapiService;
 
     const personDetails = (
-      <PersonDetails
+      <ItemDetails
         personId={11}
         getData={ getPerson }
         getImageUrl={ getPersonImage }
       >
         <Record field="gender" label="Gender"/>
         <Record field="eyeColor" label="Eye Color"/>
-      </PersonDetails>
+      </ItemDetails>
     );
 
     const starshipDetails = (
-      <PersonDetails
+      <ItemDetails
         personId={5}
         getData={ getStarship }
         getImageUrl={ getStarshipImage }
@@ -63,7 +65,7 @@ export default class App extends React.Component {
         <Record field="model" label="Model"/>
         <Record field="costInCredits" label="Cost In Credits"/>
         <Record field="length" label="Length"/>
-      </PersonDetails>
+      </ItemDetails>
     );
 
     if (this.state.hasError) {
@@ -75,19 +77,37 @@ export default class App extends React.Component {
       <div>
         <Header />
 
-            <ItemList
-              onItemSelected={ this.onPersonSelected }
-              getData={ this.swapiService.getAllPlanets }
-            >
-              { ({name}) => <span>{ name }</span> }
-            </ItemList>
+            {/*<ItemList*/}
+            {/*  onItemSelected={ this.onPersonSelected }*/}
+            {/*  getData={ this.swapiService.getAllPlanets }*/}
+            {/*>*/}
+            {/*  { ({name}) => <span>{ name }</span> }*/}
+            {/*</ItemList>*/}
 
-            <ItemList
-              onItemSelected={ this.onPersonSelected }
-              getData={ this.swapiService.getAllStarships }
-            >
-              { ({name}) => <span>{ name }</span> }
-            </ItemList>
+            {/*<ItemList*/}
+            {/*  onItemSelected={ this.onPersonSelected }*/}
+            {/*  getData={ this.swapiService.getAllStarships }*/}
+            {/*>*/}
+            {/*  { ({name}) => <span>{ name }</span> }*/}
+            {/*</ItemList>*/}
+
+            {/* после обновления */}
+
+            <PersonDetails itemId={5}/>
+            <PlanetDetails itemId={3}/>
+            <StarshipDetails itemId={2}/>
+
+            <PersonList>
+              { ({ name }) => <span>{ name }</span> }
+            </PersonList>
+
+            <StarshipList>
+              { ({ name }) => <span>{ name }</span> }
+            </StarshipList>
+
+            <PlanetList>
+              { ({ name }) => <span>{ name }</span> }
+            </PlanetList>
 
       </div>
       </ErrorBoundry>

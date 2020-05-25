@@ -18,7 +18,7 @@ export {
   Record
 };
 
-export default class PersonDetails extends React.Component {
+export default class ItemDetails extends React.Component {
   swapiService = new SwapiService();
 
   state = {

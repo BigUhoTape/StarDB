@@ -2,7 +2,7 @@ import React from "react";
 import './PeoplePage.css';
 import SwapiService from "../../services/SwapiService";
 import ItemList from "../ItemList/ItemList";
-import PersonDetails from "../PersonDetails/PersonDetails";
+import ItemDetails from "../ItemDetails/ItemDetails";
 import ErrorIndicator from "../ErrorIndicator/ErrorIndicator";
 import Row from "../Row/Row";
 import ErrorBoundry from "../ErrorBoundry/ErrorBoundry";
@@ -38,7 +38,7 @@ export default class PeoplePage extends React.Component{
     );
 
     const personDetails = (
-      <PersonDetails personId={ selectedPerson }/>
+      <ItemDetails personId={ selectedPerson }/>
     );
 
     return (
