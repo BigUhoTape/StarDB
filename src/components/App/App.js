@@ -97,17 +97,11 @@ export default class App extends React.Component {
             <PlanetDetails itemId={3}/>
             <StarshipDetails itemId={2}/>
 
-            <PersonList>
-              { ({ name }) => <span>{ name }</span> }
-            </PersonList>
+            <PersonList/>
 
-            <StarshipList>
-              { ({ name }) => <span>{ name }</span> }
-            </StarshipList>
+            <StarshipList/>
 
-            <PlanetList>
-              { ({ name }) => <span>{ name }</span> }
-            </PlanetList>
+            <PlanetList/>
 
       </div>
       </ErrorBoundry>
