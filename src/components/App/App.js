@@ -10,7 +10,7 @@ import ErrorIndicator from "../ErrorIndicator/ErrorIndicator";
 // import PeoplePage from "../PeoplePage/PeoplePage";
 import ErrorBoundry from "../ErrorBoundry/ErrorBoundry";
 import Row from "../Row/Row";
-import PersonDetails from "../PersonDetails/PersonDetails";
+import PersonDetails, { Record } from "../PersonDetails/PersonDetails";
 // import ItemList from "../ItemList/ItemList";
 // import PersonDetails from "../PersonDetails/PersonDetails";
 
@@ -48,7 +48,10 @@ export default class App extends React.Component {
         personId={11}
         getData={ getPerson }
         getImageUrl={ getPersonImage }
-      />
+      >
+        <Record field="gender" label="Gender"/>
+        <Record field="eyeColor" label="Eye Color"/>
+      </PersonDetails>
     );
 
     const starshipDetails = (
@@ -56,7 +59,8 @@ export default class App extends React.Component {
         personId={5}
         getData={ getStarship }
         getImageUrl={ getStarshipImage }
-      />
+      >
+      </PersonDetails>
     );
 
     if (this.state.hasError) {
