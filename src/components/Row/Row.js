@@ -1,7 +1,5 @@
 import React from "react";
 
-import './../PeoplePage/PeoplePage.css';
-
 const Row = ({ left, right }) => {
   return (
     <div className="row mb2">

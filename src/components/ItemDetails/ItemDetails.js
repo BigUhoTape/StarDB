@@ -59,9 +59,9 @@ export default class ItemDetails extends React.Component {
       return <span>Select a item from list.</span>
     }
 
-    // if (this.props.personId !== this.state.person.id) {
-    //   return <Spiner/>
-    // }
+    if (this.props.personId !== this.state.person.id) {
+      return <Spiner/>
+    }
 
     const { person } = this.state;
     const { image } = this.state;
