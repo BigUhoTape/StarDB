@@ -6,11 +6,11 @@ import './PersonDetails.css';
 import Spiner from "../Spiner/Spiner";
 import ErrorButton from "../ErrorButton/ErrorButton";
 
-const Record = ({ field, label }) => {
+const Record = ({ item, field, label }) => {
   return (
     <li className="list-group-item">
       <span className="term">{ label }</span>
-      <span>{ field }</span>
+      <span>{ item[field] }</span>
     </li>
   );
 };
@@ -61,7 +61,7 @@ export default class PersonDetails extends React.Component {
     //   return <Spiner/>
     // }
 
-    const { id, name, gender, birthYear, eyeColor } = this.state.person;
+    const { person } = this.state;
     const { image } = this.state;
 
     return (
@@ -72,11 +72,11 @@ export default class PersonDetails extends React.Component {
         />
 
         <div className="card-body">
-          <h4>{ name }</h4>
+          <h4>{ person.name }</h4>
           <ul className="list-group list-group-flush">
             {
               React.Children.map(this.props.children, (child, index) => {
-                return <li>{ index }</li>;
+                return React.cloneElement(child, { item: person });
               })
             }
           </ul>
